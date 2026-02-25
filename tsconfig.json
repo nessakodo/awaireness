@@ -23,6 +23,6 @@
     },
     "baseUrl": "."
   },
-  "include": ["src", "tests"],
+  "include": ["src"],
   "exclude": ["api"]
 }
