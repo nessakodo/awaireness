@@ -32,6 +32,7 @@ export function useSession() {
       usageData: data,
       metrics,
     }));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   const toggleEstimates = useCallback(() => {

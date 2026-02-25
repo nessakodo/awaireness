@@ -5,12 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Awaireness — See the invisible cost of your AI usage. Privacy-first. No data stored." />
     <meta name="theme-color" content="#09090b" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Awaireness" />
+    <meta property="og:title" content="Awaireness — See the invisible cost of AI" />
+    <meta property="og:description" content="Calculate the water, energy, and CO₂ footprint of your AI usage. Privacy-first — no data stored." />
+    <meta property="og:url" content="https://awaireness.app" />
+    <meta property="og:image" content="https://awaireness.app/og.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Awaireness — See the invisible cost of AI" />
+    <meta name="twitter:description" content="Calculate the water, energy, and CO₂ footprint of your AI usage. Privacy-first — no data stored." />
+    <meta name="twitter:image" content="https://awaireness.app/og.svg" />
     <!-- CSP relaxed for Vite dev server. Production CSP is enforced by vercel.json headers. -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="Referrer-Policy" content="no-referrer" />
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
-    <title>Awaireness</title>
+    <title>Awaireness — See the invisible cost of AI</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href="https://awaireness.app" />
+    <!-- Structured data for search engines and LLM agents -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Awaireness",
+      "url": "https://awaireness.app",
+      "description": "Calculate the water, energy, and CO₂ footprint of your AI usage. Privacy-first — no data stored.",
+      "applicationCategory": "EnvironmentalApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "featureList": [
+        "AI water consumption calculator",
+        "AI energy usage calculator",
+        "AI CO₂ emissions calculator",
+        "Privacy-first — zero data persistence",
+        "ChatGPT and Anthropic export parsing",
+        "Shareable impact cards"
+      ],
+      "author": {
+        "@type": "Person",
+        "name": "nessakodo",
+        "url": "https://github.com/nessakodo"
+      }
+    }
+    </script>
   </head>
   <body class="bg-surface-0 text-white antialiased">
     <div id="root"></div>

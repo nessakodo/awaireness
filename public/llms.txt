@@ -1,0 +1,32 @@
+# Awaireness
+
+> See the invisible cost of AI
+
+## What this is
+Awaireness is a privacy-first web app that calculates the environmental footprint of your AI usage — water consumption, energy use, and CO₂ emissions — without storing any of your data.
+
+## How it works
+1. Users provide AI usage data via file import (ChatGPT/Anthropic exports) or API key (one-time read, never stored)
+2. The app calculates water (liters), energy (kWh), and CO₂ (grams) using published research on data center resource consumption
+3. Results are displayed with real-world comparisons (e.g., "equivalent to X glasses of water")
+4. All computation happens in-browser. No data is persisted, transmitted, or logged.
+
+## Privacy model
+- Zero data persistence: no cookies, no localStorage, no databases
+- API keys are used once in-memory and discarded
+- No analytics, tracking pixels, or third-party scripts
+- File imports are parsed client-side and never uploaded
+
+## Key metrics calculated
+- **Water**: Liters of cooling water consumed by data centers per prompt/token
+- **Energy**: Kilowatt-hours of electricity used for inference
+- **CO₂**: Grams of carbon dioxide equivalent emissions
+
+## Methodology
+Calculations are based on peer-reviewed research including data center PUE (Power Usage Effectiveness), WUE (Water Usage Effectiveness), and regional grid carbon intensity factors. All estimates are conservative and sourced from published literature.
+
+## Technical details
+- Framework: Vite + React 18 (TypeScript)
+- Hosting: Vercel
+- Domain: https://awaireness.app
+- License: Open source
