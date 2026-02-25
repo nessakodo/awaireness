@@ -27,7 +27,7 @@ export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
   }, [shareText]);
 
   const handleCopyLink = useCallback(async () => {
-    await copyToClipboard('https://awaireness.com');
+    await copyToClipboard('https://awaireness.app');
     setCopied('link');
     setTimeout(() => setCopied(null), 2000);
   }, []);

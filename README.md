@@ -1,11 +1,12 @@
 
+
 # aw**ai**reness
 
 **See the invisible cost of AI.**
 
 Every prompt uses water, energy, and emits carbon. Awaireness shows you the footprint — without ever touching your data.
 
-[awaireness.com](https://awaireness.com)
+[awaireness.app](https://awaireness.app)
 
 ---
 
@@ -199,7 +200,7 @@ Configured for Vercel. Security headers, SPA rewrites, and the API edge function
 npx vercel --prod
 ```
 
-Then add `awaireness.com` as a custom domain in the Vercel dashboard under Settings → Domains.
+Then add `awaireness.app` as a custom domain in the Vercel dashboard under Settings → Domains.
 
 ---
 

@@ -10,7 +10,7 @@ import type { EcoMetrics, VerificationStatus } from '@/types';
 
 const CARD_WIDTH = 1200;
 const CARD_HEIGHT = 630;
-const APP_URL = 'https://awaireness.com';
+const APP_URL = 'https://awaireness.app';
 
 export function generateShareText(metrics: EcoMetrics, verification: VerificationStatus): string {
   const waterStr = metrics.waterLiters >= 1
@@ -183,7 +183,7 @@ export function generateReportJson(metrics: EcoMetrics, verification: Verificati
     breakdownByDay: metrics.byDay,
     breakdownByModel: metrics.byModel,
     methodology: {
-      note: 'All figures are estimates based on published research. See awaireness.com/methodology for details.',
+      note: 'All figures are estimates based on published research. See awaireness.app/methodology for details.',
     },
   };
   return new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
