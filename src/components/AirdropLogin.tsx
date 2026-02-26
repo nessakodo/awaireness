@@ -16,11 +16,11 @@ export function AirdropLogin({ onData, onBack }: Props) {
   const [mode, setMode] = useState<Mode>('select');
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4">
+    <div className="fixed inset-0 flex items-center justify-center overflow-y-auto p-4">
       <div className="w-full max-w-md animate-fade-in">
-        <div className="mb-8 text-center">
-          <h2 className="text-3xl font-semibold tracking-tight">Your AI footprint</h2>
-          <p className="mt-3 text-base text-zinc-400">Choose how to view your impact</p>
+        <div className="mb-5 text-center">
+          <h2 className="text-2xl font-semibold tracking-tight">Your AI footprint</h2>
+          <p className="mt-2 text-sm text-zinc-400">Choose how to view your impact</p>
         </div>
 
         {mode === 'select' && <ModeSelector onSelect={setMode} onBack={onBack} />}
@@ -59,29 +59,29 @@ function ModeSelector({ onSelect, onBack }: { onSelect: (m: Mode) => void; onBac
   ];
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {options.map((opt) => (
         <button
           key={opt.id}
           onClick={() => onSelect(opt.id)}
-          className="glass group flex w-full items-start gap-4 rounded-2xl p-6 text-left transition-all hover:border-zinc-600 hover:bg-surface-2/50 focus-visible:ring-2 focus-visible:ring-eco-500"
+          className="glass group flex w-full items-start gap-3 rounded-2xl p-4 text-left transition-all hover:border-zinc-600 hover:bg-surface-2/50 focus-visible:ring-2 focus-visible:ring-eco-500"
           aria-label={opt.title}
         >
-          <div className="mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-surface-2 transition-colors group-hover:bg-surface-3">
-            <svg className="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+          <div className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-surface-2 transition-colors group-hover:bg-surface-3">
+            <svg className="h-4 w-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
               {opt.icon}
             </svg>
           </div>
-          <div className="flex-1">
+          <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
-              <h3 className="text-base font-medium text-white">{opt.title}</h3>
+              <h3 className="text-sm font-medium text-white">{opt.title}</h3>
               {'badge' in opt && opt.badge && (
                 <span className="rounded-full bg-eco-500/10 px-2 py-0.5 text-[10px] font-medium text-eco-400">
                   {opt.badge}
                 </span>
               )}
             </div>
-            <p className="mt-1 text-sm leading-relaxed text-zinc-400">{opt.description}</p>
+            <p className="mt-0.5 text-xs leading-relaxed text-zinc-400">{opt.description}</p>
           </div>
         </button>
       ))}
