@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import type { EcoMetrics, VerificationStatus } from '@/types';
 import {
   generateShareText,
@@ -20,6 +20,23 @@ export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
   const [copied, setCopied] = useState<string | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [generating, setGenerating] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  // Escape key to close
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleKey);
+    panelRef.current?.focus();
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [onClose]);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
 
   // Auto-generate the share card image when the panel opens
   useEffect(() => {
@@ -94,17 +111,24 @@ export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
       aria-modal="true"
       aria-label="Share your footprint"
     >
-      <div className="glass w-full max-w-lg animate-slide-up overflow-y-auto rounded-t-3xl p-8 md:max-h-[90vh] md:rounded-3xl">
-        <div className="mb-6 flex items-center justify-between">
+      <div
+        ref={panelRef}
+        tabIndex={-1}
+        className="modal-panel w-full max-w-lg animate-slide-up overflow-y-auto rounded-t-3xl p-6 pb-8 md:max-h-[85vh] md:rounded-3xl md:p-8"
+      >
+        {/* Mobile drag handle */}
+        <div className="mb-4 flex justify-center md:hidden">
+          <div className="h-1 w-10 rounded-full bg-zinc-600" />
+        </div>
+
+        <div className="mb-5 flex items-center justify-between">
           <h2 className="text-xl font-semibold">Share</h2>
           <button
             onClick={onClose}
-            className="rounded-lg p-2.5 text-zinc-400 transition-colors hover:bg-surface-2 hover:text-zinc-200"
+            className="rounded-xl border border-zinc-700 px-3 py-1.5 text-sm text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-200"
             aria-label="Close share panel"
           >
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            Done
           </button>
         </div>
 
@@ -123,7 +147,7 @@ export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
             <img
               src={imageUrl}
               alt="Your AI footprint share card"
-              className="w-full"
+              className="block w-full"
               draggable
             />
           )}
@@ -172,6 +196,14 @@ export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
         <p className="mt-3 text-center text-xs text-zinc-600">
           Image and text are generated locally. Nothing is uploaded.
         </p>
+
+        {/* Bottom close button — always visible at end of scroll */}
+        <button
+          onClick={onClose}
+          className="mt-5 w-full rounded-xl border border-zinc-700 py-3.5 text-base text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-200"
+        >
+          Close
+        </button>
       </div>
     </div>
   );

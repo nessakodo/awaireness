@@ -29,12 +29,14 @@ export default {
         sans: [
           '-apple-system',
           'BlinkMacSystemFont',
-          'SF Pro Display',
-          'SF Pro Text',
+          'Segoe UI',
+          'Roboto',
+          'Oxygen',
+          'Ubuntu',
           'system-ui',
           'sans-serif',
         ],
-        mono: ['SF Mono', 'Fira Code', 'monospace'],
+        mono: ['SF Mono', 'Fira Code', 'Consolas', 'monospace'],
       },
       backdropBlur: {
         xs: '2px',

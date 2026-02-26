@@ -18,6 +18,12 @@ export function MethodologyDrawer({ onClose }: Props) {
     return () => document.removeEventListener('keydown', handleKey);
   }, [onClose]);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm md:items-center"
@@ -29,18 +35,21 @@ export function MethodologyDrawer({ onClose }: Props) {
       <div
         ref={drawerRef}
         tabIndex={-1}
-        className="glass w-full max-w-2xl animate-slide-up overflow-y-auto rounded-t-3xl p-8 md:max-h-[90vh] md:rounded-3xl"
+        className="modal-panel w-full max-w-2xl animate-slide-up overflow-y-auto rounded-t-3xl p-6 pb-8 md:max-h-[90vh] md:rounded-3xl md:p-8"
       >
+        {/* Mobile drag handle */}
+        <div className="mb-4 flex justify-center md:hidden">
+          <div className="h-1 w-10 rounded-full bg-zinc-600" />
+        </div>
+
         <div className="mb-6 flex items-center justify-between">
           <h2 className="text-xl font-semibold">Methodology</h2>
           <button
             onClick={onClose}
-            className="rounded-lg p-2 text-zinc-500 transition-colors hover:bg-surface-2 hover:text-zinc-300"
+            className="rounded-xl border border-zinc-700 px-3 py-1.5 text-sm text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-200"
             aria-label="Close methodology panel"
           >
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            Done
           </button>
         </div>
 
@@ -94,6 +103,14 @@ export function MethodologyDrawer({ onClose }: Props) {
             </div>
           </div>
         </div>
+
+        {/* Bottom close button — always visible at end of scroll */}
+        <button
+          onClick={onClose}
+          className="mt-6 w-full rounded-xl border border-zinc-700 py-3.5 text-base text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-200"
+        >
+          Close
+        </button>
       </div>
     </div>
   );
