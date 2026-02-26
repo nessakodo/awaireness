@@ -28,13 +28,13 @@ export default function handler() {
           }}
         >
           {/* Brand */}
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '24px' }}>
             {/* Droplet icon */}
             <svg
-              width="48"
-              height="48"
+              width="56"
+              height="56"
               viewBox="0 0 32 32"
-              style={{ marginRight: '16px' }}
+              style={{ marginRight: '20px' }}
             >
               <circle cx="16" cy="16" r="14" fill="#09090b" stroke="#22c55e" strokeWidth="1.5" />
               <path
@@ -45,19 +45,19 @@ export default function handler() {
                 strokeLinecap="round"
               />
             </svg>
-            <span style={{ fontSize: '48px', fontWeight: 600, color: '#ffffff' }}>
+            <span style={{ fontSize: '56px', fontWeight: 600, color: '#ffffff' }}>
               aw
             </span>
-            <span style={{ fontSize: '48px', fontWeight: 600, color: '#4ade80' }}>
+            <span style={{ fontSize: '56px', fontWeight: 600, color: '#4ade80' }}>
               ai
             </span>
-            <span style={{ fontSize: '48px', fontWeight: 600, color: '#ffffff' }}>
+            <span style={{ fontSize: '56px', fontWeight: 600, color: '#ffffff' }}>
               reness
             </span>
           </div>
 
           {/* Tagline */}
-          <p style={{ fontSize: '28px', color: '#a1a1aa', margin: '0 0 48px 0' }}>
+          <p style={{ fontSize: '32px', color: '#a1a1aa', margin: '0 0 48px 0' }}>
             See the invisible cost of AI
           </p>
 
@@ -80,10 +80,8 @@ export default function handler() {
               </span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span
-                style={{ fontSize: '44px', fontWeight: 700, color: '#4ade80' }}
-              >
-                CO₂
+              <span style={{ fontSize: '44px', fontWeight: 700, color: '#4ade80' }}>
+                Carbon
               </span>
               <span style={{ fontSize: '18px', color: '#71717a', marginTop: '4px' }}>
                 Grams emitted

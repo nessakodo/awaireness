@@ -18,7 +18,7 @@
   <text x="120" y="355" font-family="-apple-system,system-ui,sans-serif" font-weight="400" font-size="20" fill="#a1a1aa">Liters consumed</text>
   <text x="460" y="320" font-family="-apple-system,system-ui,sans-serif" font-weight="700" font-size="56" fill="#facc15">Energy</text>
   <text x="460" y="355" font-family="-apple-system,system-ui,sans-serif" font-weight="400" font-size="20" fill="#a1a1aa">kWh used</text>
-  <text x="800" y="320" font-family="-apple-system,system-ui,sans-serif" font-weight="700" font-size="56" fill="#4ade80">CO₂</text>
+  <text x="800" y="320" font-family="-apple-system,system-ui,sans-serif" font-weight="700" font-size="56" fill="#4ade80">Carbon</text>
   <text x="800" y="355" font-family="-apple-system,system-ui,sans-serif" font-weight="400" font-size="20" fill="#a1a1aa">Grams emitted</text>
   <!-- Brand footer -->
   <text x="120" y="510" font-family="-apple-system,system-ui,sans-serif" font-weight="500" font-size="24" fill="#ffffff">aw</text>

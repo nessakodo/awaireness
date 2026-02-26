@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import type { EcoMetrics, VerificationStatus } from '@/types';
 import {
   generateShareText,
@@ -18,7 +18,33 @@ interface Props {
 export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
   const [shareText, setShareText] = useState(() => generateShareText(metrics, verification));
   const [copied, setCopied] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [generating, setGenerating] = useState(false);
+
+  // Auto-generate the share card image when the panel opens
+  useEffect(() => {
+    let cancelled = false;
+    setGenerating(true);
+    generateShareCard(metrics, verification)
+      .then((blob) => {
+        if (!cancelled) {
+          setImageUrl(URL.createObjectURL(blob));
+        }
+      })
+      .catch(() => {})
+      .finally(() => { if (!cancelled) setGenerating(false); });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [metrics, verification]);
+
+  // Clean up object URL on unmount
+  useEffect(() => {
+    return () => {
+      if (imageUrl) URL.revokeObjectURL(imageUrl);
+    };
+  }, [imageUrl]);
 
   const handleCopyText = useCallback(async () => {
     await copyToClipboard(shareText);
@@ -32,16 +58,12 @@ export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
     setTimeout(() => setCopied(null), 2000);
   }, []);
 
-  const handleDownloadImage = useCallback(async () => {
-    setGenerating(true);
-    try {
-      const blob = await generateShareCard(metrics, verification);
-      downloadBlob(blob, 'awaireness-footprint.png');
-    } catch (e) {
-      console.error('Failed to generate share card:', e);
-    }
-    setGenerating(false);
-  }, [metrics, verification]);
+  const handleSaveImage = useCallback(async () => {
+    if (!imageUrl) return;
+    // Re-generate a fresh blob for download
+    const blob = await generateShareCard(metrics, verification);
+    downloadBlob(blob, 'awaireness-footprint.png');
+  }, [imageUrl, metrics, verification]);
 
   const handleDownloadReport = useCallback(() => {
     const blob = generateReportJson(metrics, verification);
@@ -60,23 +82,49 @@ export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
       aria-modal="true"
       aria-label="Share your footprint"
     >
-      <div className="glass w-full max-w-lg animate-slide-up rounded-t-3xl p-8 md:rounded-3xl">
+      <div className="glass w-full max-w-lg animate-slide-up overflow-y-auto rounded-t-3xl p-8 md:max-h-[90vh] md:rounded-3xl">
         <div className="mb-6 flex items-center justify-between">
           <h2 className="text-xl font-semibold">Share</h2>
           <button
             onClick={onClose}
-            className="rounded-lg p-2 text-zinc-500 transition-colors hover:bg-surface-2 hover:text-zinc-300"
+            className="rounded-lg p-2.5 text-zinc-400 transition-colors hover:bg-surface-2 hover:text-zinc-200"
             aria-label="Close share panel"
           >
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
         <p className="mb-4 text-sm text-zinc-400">
-          All sharing is initiated by you. No data is sent automatically. Share links point to the public app — not to your personal data, because none exists.
+          All sharing is initiated by you. No data is sent automatically.
         </p>
+
+        {/* Image preview */}
+        <div className="mb-4 overflow-hidden rounded-xl border border-zinc-800">
+          {generating && (
+            <div className="flex h-40 items-center justify-center bg-surface-2/50">
+              <p className="text-sm text-zinc-500">Generating image...</p>
+            </div>
+          )}
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              alt="Your AI footprint share card"
+              className="w-full"
+              draggable
+            />
+          )}
+        </div>
+
+        {imageUrl && (
+          <button
+            onClick={handleSaveImage}
+            className="mb-4 w-full rounded-xl bg-white py-4 text-base font-medium text-black transition-opacity hover:opacity-90"
+          >
+            Save image
+          </button>
+        )}
 
         {/* Editable share text */}
         <div className="mb-4">
@@ -99,28 +147,19 @@ export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
             Post to X
           </ShareButton>
           <ShareButton onClick={handleCopyText} label="Copy summary text">
-            {copied === 'text' ? 'Copied' : 'Copy text'}
+            {copied === 'text' ? 'Copied!' : 'Copy text'}
           </ShareButton>
           <ShareButton onClick={handleCopyLink} label="Copy app link">
-            {copied === 'link' ? 'Copied' : 'Copy link'}
+            {copied === 'link' ? 'Copied!' : 'Copy link'}
           </ShareButton>
-          <ShareButton onClick={handleDownloadImage} label="Download share image" disabled={generating}>
-            {generating ? 'Generating…' : 'Download image'}
+          <ShareButton onClick={handleDownloadReport} label="Download JSON report">
+            Download report
           </ShareButton>
         </div>
 
-        {/* Report download */}
-        <div className="mt-4 border-t border-zinc-800/50 pt-4">
-          <button
-            onClick={handleDownloadReport}
-            className="w-full rounded-xl border border-zinc-800 py-3.5 text-sm text-zinc-300 transition-colors hover:border-zinc-700 hover:text-zinc-200"
-          >
-            Download full report (JSON)
-          </button>
-          <p className="mt-1 text-center text-xs text-zinc-600">
-            Generated locally in browser memory. Not uploaded anywhere.
-          </p>
-        </div>
+        <p className="mt-3 text-center text-xs text-zinc-600">
+          Image and text are generated locally. Nothing is uploaded.
+        </p>
       </div>
     </div>
   );

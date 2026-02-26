@@ -29,7 +29,7 @@ export function MethodologyDrawer({ onClose }: Props) {
       <div
         ref={drawerRef}
         tabIndex={-1}
-        className="glass w-full max-w-2xl animate-slide-up rounded-t-3xl p-8 md:rounded-3xl"
+        className="glass w-full max-w-2xl animate-slide-up overflow-y-auto rounded-t-3xl p-8 md:max-h-[90vh] md:rounded-3xl"
       >
         <div className="mb-6 flex items-center justify-between">
           <h2 className="text-xl font-semibold">Methodology</h2>

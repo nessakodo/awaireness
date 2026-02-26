@@ -9,8 +9,8 @@ export function DisclosureGate({ onAccept }: Props) {
   const [showThreat, setShowThreat] = useState(false);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-surface-0 p-4">
-      <div className="w-full max-w-lg animate-fade-in">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-surface-0 px-4 py-8">
+      <div className="mx-auto w-full max-w-lg animate-fade-in">
         {/* Logo */}
         <div className="mb-12 text-center">
           <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl border border-zinc-800 bg-surface-1">

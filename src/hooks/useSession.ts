@@ -22,6 +22,7 @@ export function useSession() {
 
   const acceptDisclosure = useCallback(() => {
     setState((s) => ({ ...s, phase: 'login' }));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   const setUsageData = useCallback((data: UsageData) => {
@@ -41,6 +42,7 @@ export function useSession() {
 
   const reset = useCallback(() => {
     setState(INITIAL_STATE);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   const goBack = useCallback(() => {
@@ -49,6 +51,7 @@ export function useSession() {
       if (s.phase === 'login') return { ...s, phase: 'disclosure' };
       return s;
     });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   return {
