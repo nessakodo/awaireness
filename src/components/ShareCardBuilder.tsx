@@ -114,7 +114,7 @@ export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
       <div
         ref={panelRef}
         tabIndex={-1}
-        className="modal-panel w-full max-w-lg animate-slide-up overflow-y-auto rounded-t-3xl p-6 pb-8 md:max-h-[85vh] md:rounded-3xl md:p-8"
+        className="modal-panel max-h-[85vh] w-full max-w-lg animate-slide-up overflow-y-auto rounded-t-3xl p-6 pb-8 md:rounded-3xl md:p-8"
       >
         {/* Mobile drag handle */}
         <div className="mb-4 flex justify-center md:hidden">

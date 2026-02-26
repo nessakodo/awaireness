@@ -96,7 +96,7 @@ export function ImpactDashboard({
       </div>
 
       {/* Usage stats row */}
-      <div className="mb-6 grid grid-cols-3 gap-4">
+      <div className="mb-6 grid grid-cols-3 gap-2 sm:gap-4">
         <MetricCard label="Total tokens" value={formatTokens(metrics.totalTokens)} />
         <MetricCard label="Prompts" value={metrics.totalPrompts.toLocaleString()} />
         <MetricCard label="Conversations" value={metrics.totalConversations.toLocaleString()} />
@@ -254,9 +254,9 @@ function VerificationBadge({ status }: { status: VerificationStatus }) {
 
 function MetricCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="glass-light rounded-2xl px-5 py-5">
-      <p className="text-2xl font-light tracking-tight text-white">{value}</p>
-      <p className="mt-1 text-sm text-zinc-400">{label}</p>
+    <div className="glass-light min-w-0 rounded-2xl px-3 py-4 sm:px-5 sm:py-5">
+      <p className="truncate text-xl font-light tracking-tight text-white sm:text-2xl">{value}</p>
+      <p className="mt-1 truncate text-xs text-zinc-400 sm:text-sm">{label}</p>
     </div>
   );
 }
