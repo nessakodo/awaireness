@@ -60,8 +60,20 @@ export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
 
   const handleSaveImage = useCallback(async () => {
     if (!imageUrl) return;
-    // Re-generate a fresh blob for download
     const blob = await generateShareCard(metrics, verification);
+    const file = new File([blob], 'awaireness-footprint.png', { type: 'image/png' });
+
+    // Use native share sheet on mobile (opens Save to Photos, AirDrop, etc.)
+    if (navigator.share && navigator.canShare?.({ files: [file] })) {
+      try {
+        await navigator.share({ files: [file] });
+        return;
+      } catch {
+        // User cancelled or share failed — fall through to download
+      }
+    }
+
+    // Desktop fallback: trigger file download
     downloadBlob(blob, 'awaireness-footprint.png');
   }, [imageUrl, metrics, verification]);
 
