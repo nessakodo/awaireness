@@ -13,8 +13,8 @@ export function DisclosureGate({ onAccept }: Props) {
       <div className="w-full max-w-lg animate-fade-in">
         {/* Logo */}
         <div className="mb-12 text-center">
-          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-zinc-800 bg-surface-1">
-            <svg viewBox="0 0 32 32" className="h-8 w-8" aria-hidden="true">
+          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl border border-zinc-800 bg-surface-1">
+            <svg viewBox="0 0 32 32" className="h-10 w-10" aria-hidden="true">
               <path
                 d="M16 6 C11 13, 9 17, 9 21 C9 25 12 27 16 27 C20 27 23 25 23 21 C23 17 21 13 16 6Z"
                 fill="none"
@@ -24,8 +24,8 @@ export function DisclosureGate({ onAccept }: Props) {
               />
             </svg>
           </div>
-          <h1 className="text-3xl font-semibold tracking-tight">aw<span className="text-eco-400">ai</span>reness</h1>
-          <p className="mt-2 text-zinc-500">See the invisible cost of AI</p>
+          <h1 className="text-4xl font-semibold tracking-tight">aw<span className="text-eco-400">ai</span>reness</h1>
+          <p className="mt-3 text-lg text-zinc-400">See the invisible cost of AI</p>
         </div>
 
         {/* Disclosure card */}
@@ -37,8 +37,8 @@ export function DisclosureGate({ onAccept }: Props) {
               </svg>
             </div>
             <div>
-              <h2 className="text-lg font-medium text-white">This app stores no personal data</h2>
-              <p className="mt-1 text-sm leading-relaxed text-zinc-400">
+              <h2 className="text-xl font-medium text-white">This app stores no personal data</h2>
+              <p className="mt-2 text-base leading-relaxed text-zinc-300">
                 Your usage stays on your device. No tracking. No cookies. No analytics. No fingerprinting. No server-side storage. Nothing persists after you close this tab.
               </p>
             </div>
@@ -47,30 +47,28 @@ export function DisclosureGate({ onAccept }: Props) {
           <div className="space-y-2">
             <button
               onClick={onAccept}
-              className="w-full rounded-xl bg-white py-3 text-sm font-medium text-black transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-eco-500"
+              className="w-full rounded-xl bg-white py-4 text-base font-medium text-black transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-eco-500"
               aria-label="Accept privacy disclosure and continue"
             >
               Continue
             </button>
 
-            <div className="flex gap-2">
-              <button
-                onClick={() => setShowDetails((v) => !v)}
-                className="flex-1 rounded-xl border border-zinc-800 py-2.5 text-sm text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-300"
-                aria-expanded={showDetails}
-                aria-controls="details-panel"
-              >
-                {showDetails ? 'Hide' : 'View'} technical details
-              </button>
-              <button
-                onClick={() => setShowThreat((v) => !v)}
-                className="flex-1 rounded-xl border border-zinc-800 py-2.5 text-sm text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-300"
-                aria-expanded={showThreat}
-                aria-controls="threat-panel"
-              >
-                {showThreat ? 'Hide' : 'View'} threat model
-              </button>
-            </div>
+            <button
+              onClick={() => setShowDetails((v) => !v)}
+              className="w-full rounded-xl border border-zinc-800 py-3.5 text-base text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-300"
+              aria-expanded={showDetails}
+              aria-controls="details-panel"
+            >
+              {showDetails ? 'Hide details' : 'Technical details'}
+            </button>
+            <button
+              onClick={() => setShowThreat((v) => !v)}
+              className="w-full rounded-xl border border-zinc-800 py-3.5 text-base text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-300"
+              aria-expanded={showThreat}
+              aria-controls="threat-panel"
+            >
+              {showThreat ? 'Hide threats' : 'Threat model'}
+            </button>
           </div>
         </div>
 
@@ -82,8 +80,8 @@ export function DisclosureGate({ onAccept }: Props) {
             role="region"
             aria-label="Technical privacy details"
           >
-            <h3 className="mb-4 text-sm font-medium uppercase tracking-wider text-zinc-500">How we keep it true</h3>
-            <div className="space-y-4 text-sm text-zinc-400">
+            <h3 className="mb-4 text-base font-medium uppercase tracking-wider text-zinc-400">How we keep it true</h3>
+            <div className="space-y-4 text-base text-zinc-300">
               <Detail
                 title="What is stored"
                 text="Nothing. localStorage, sessionStorage, indexedDB, and cookies are programmatically blocked. A runtime enforcement layer throws if any code attempts to use them."
@@ -105,6 +103,12 @@ export function DisclosureGate({ onAccept }: Props) {
                 text="Strict CSP headers block inline scripts, external connections, and third-party resources. No CDNs, no analytics scripts, no tracking pixels."
               />
             </div>
+            <button
+              onClick={() => setShowDetails(false)}
+              className="mt-5 w-full rounded-xl border border-zinc-800 py-3 text-base text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-300"
+            >
+              Close
+            </button>
           </div>
         )}
 
@@ -116,8 +120,8 @@ export function DisclosureGate({ onAccept }: Props) {
             role="region"
             aria-label="Threat model"
           >
-            <h3 className="mb-4 text-sm font-medium uppercase tracking-wider text-zinc-500">Threat Model</h3>
-            <div className="space-y-4 text-sm text-zinc-400">
+            <h3 className="mb-4 text-base font-medium uppercase tracking-wider text-zinc-400">Threat Model</h3>
+            <div className="space-y-4 text-base text-zinc-300">
               <Detail
                 title="Malicious export file"
                 text="All parsed content is sanitized. HTML entities are escaped. String lengths are capped. Only expected fields are extracted. No eval() or dynamic code execution."
@@ -139,6 +143,12 @@ export function DisclosureGate({ onAccept }: Props) {
                 text="We cannot prevent extensions from reading page content. Users concerned about this should use a clean browser profile."
               />
             </div>
+            <button
+              onClick={() => setShowThreat(false)}
+              className="mt-5 w-full rounded-xl border border-zinc-800 py-3 text-base text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-300"
+            >
+              Close
+            </button>
           </div>
         )}
       </div>
@@ -149,8 +159,8 @@ export function DisclosureGate({ onAccept }: Props) {
 function Detail({ title, text }: { title: string; text: string }) {
   return (
     <div>
-      <dt className="font-medium text-zinc-300">{title}</dt>
-      <dd className="mt-0.5 text-zinc-500">{text}</dd>
+      <dt className="font-medium text-zinc-200">{title}</dt>
+      <dd className="mt-1 text-zinc-400">{text}</dd>
     </div>
   );
 }

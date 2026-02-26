@@ -9,20 +9,21 @@ type Mode = 'select' | 'import' | 'apikey' | 'demo';
 
 interface Props {
   onData: (data: UsageData) => void;
+  onBack: () => void;
 }
 
-export function AirdropLogin({ onData }: Props) {
+export function AirdropLogin({ onData, onBack }: Props) {
   const [mode, setMode] = useState<Mode>('select');
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
       <div className="w-full max-w-md animate-fade-in">
         <div className="mb-8 text-center">
-          <h2 className="text-2xl font-semibold tracking-tight">Your AI footprint</h2>
-          <p className="mt-2 text-sm text-zinc-500">Choose how to view your impact</p>
+          <h2 className="text-3xl font-semibold tracking-tight">Your AI footprint</h2>
+          <p className="mt-3 text-base text-zinc-400">Choose how to view your impact</p>
         </div>
 
-        {mode === 'select' && <ModeSelector onSelect={setMode} />}
+        {mode === 'select' && <ModeSelector onSelect={setMode} onBack={onBack} />}
         {mode === 'import' && <ImportMode onData={onData} onBack={() => setMode('select')} />}
         {mode === 'apikey' && <ApiKeyMode onData={onData} onBack={() => setMode('select')} />}
         {mode === 'demo' && <DemoMode onData={onData} onBack={() => setMode('select')} />}
@@ -33,7 +34,7 @@ export function AirdropLogin({ onData }: Props) {
 
 // ─── Mode Selector ──────────────────────────────────────
 
-function ModeSelector({ onSelect }: { onSelect: (m: Mode) => void }) {
+function ModeSelector({ onSelect, onBack }: { onSelect: (m: Mode) => void; onBack: () => void }) {
   const options = [
     {
       id: 'import' as const,
@@ -63,7 +64,7 @@ function ModeSelector({ onSelect }: { onSelect: (m: Mode) => void }) {
         <button
           key={opt.id}
           onClick={() => onSelect(opt.id)}
-          className="glass group flex w-full items-start gap-4 rounded-2xl p-5 text-left transition-all hover:border-zinc-600 hover:bg-surface-2/50 focus-visible:ring-2 focus-visible:ring-eco-500"
+          className="glass group flex w-full items-start gap-4 rounded-2xl p-6 text-left transition-all hover:border-zinc-600 hover:bg-surface-2/50 focus-visible:ring-2 focus-visible:ring-eco-500"
           aria-label={opt.title}
         >
           <div className="mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-surface-2 transition-colors group-hover:bg-surface-3">
@@ -73,17 +74,18 @@ function ModeSelector({ onSelect }: { onSelect: (m: Mode) => void }) {
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <h3 className="text-sm font-medium text-white">{opt.title}</h3>
+              <h3 className="text-base font-medium text-white">{opt.title}</h3>
               {'badge' in opt && opt.badge && (
                 <span className="rounded-full bg-eco-500/10 px-2 py-0.5 text-[10px] font-medium text-eco-400">
                   {opt.badge}
                 </span>
               )}
             </div>
-            <p className="mt-0.5 text-xs leading-relaxed text-zinc-500">{opt.description}</p>
+            <p className="mt-1 text-sm leading-relaxed text-zinc-400">{opt.description}</p>
           </div>
         </button>
       ))}
+      <BackButton onClick={onBack} />
     </div>
   );
 }
@@ -117,8 +119,8 @@ function ImportMode({ onData, onBack }: { onData: (d: UsageData) => void; onBack
   return (
     <div className="space-y-4">
       <div className="glass rounded-2xl p-6">
-        <h3 className="mb-1 text-sm font-medium text-white">Import usage data</h3>
-        <p className="mb-2 text-xs text-zinc-500">
+        <h3 className="mb-2 text-lg font-medium text-white">Import usage data</h3>
+        <p className="mb-3 text-sm text-zinc-400">
           Your file is processed in a secure, sandboxed Web Worker with no network access. Raw content is zeroed from memory after parsing. Only numerical usage data is extracted.
         </p>
 
@@ -194,7 +196,7 @@ function ImportMode({ onData, onBack }: { onData: (d: UsageData) => void; onBack
         )}
 
         {/* File upload */}
-        <label className="flex w-full cursor-pointer items-center justify-center rounded-xl border border-dashed border-zinc-700 py-8 text-sm text-zinc-500 transition-colors hover:border-zinc-500 hover:text-zinc-300">
+        <label className="flex w-full cursor-pointer items-center justify-center rounded-xl border-2 border-dashed border-zinc-600 py-10 text-base text-zinc-400 transition-colors hover:border-zinc-500 hover:text-zinc-300">
           <input
             type="file"
             accept=".json,.csv,.tsv"
@@ -227,7 +229,7 @@ function ImportMode({ onData, onBack }: { onData: (d: UsageData) => void; onBack
             </div>
             <button
               onClick={confirmImport}
-              className="w-full rounded-xl bg-white py-3 text-sm font-medium text-black transition-opacity hover:opacity-90"
+              className="w-full rounded-xl bg-white py-4 text-base font-medium text-black transition-opacity hover:opacity-90"
             >
               Calculate impact
             </button>
@@ -315,8 +317,8 @@ function ApiKeyMode({ onData, onBack }: { onData: (d: UsageData) => void; onBack
       </div>
 
       <div className="glass rounded-2xl p-6">
-        <h3 className="mb-1 text-sm font-medium text-white">Connect with API key</h3>
-        <p className="mb-4 text-xs text-zinc-500">
+        <h3 className="mb-2 text-lg font-medium text-white">Connect with API key</h3>
+        <p className="mb-4 text-sm text-zinc-400">
           Your key is used once through a local proxy, then immediately discarded from memory. It is never stored, logged, or sent anywhere other than the provider's API.
         </p>
 
@@ -414,7 +416,7 @@ function ApiKeyMode({ onData, onBack }: { onData: (d: UsageData) => void; onBack
         <button
           onClick={handleFetch}
           disabled={!apiKey.trim() || status === 'loading' || !!keyWarning}
-          className="w-full rounded-xl bg-white py-3 text-sm font-medium text-black transition-opacity hover:opacity-90 disabled:opacity-40"
+          className="w-full rounded-xl bg-white py-4 text-base font-medium text-black transition-opacity hover:opacity-90 disabled:opacity-40"
         >
           {status === 'loading' ? 'Fetching usage…' : 'Fetch my usage'}
         </button>
@@ -446,8 +448,8 @@ function DemoMode({ onData, onBack }: { onData: (d: UsageData) => void; onBack: 
   return (
     <div className="space-y-4">
       <div className="glass rounded-2xl p-6">
-        <h3 className="mb-1 text-sm font-medium text-white">Demo mode</h3>
-        <p className="mb-4 text-xs text-zinc-500">
+        <h3 className="mb-2 text-lg font-medium text-white">Demo mode</h3>
+        <p className="mb-4 text-sm text-zinc-400">
           Generate a realistic usage profile with synthetic data. Pick a preset that matches your habits, or dial in custom numbers. Nothing leaves your device.
         </p>
 
@@ -530,7 +532,7 @@ function DemoMode({ onData, onBack }: { onData: (d: UsageData) => void; onBack: 
 
         <button
           onClick={handleGenerate}
-          className="mt-5 w-full rounded-xl bg-white py-3 text-sm font-medium text-black transition-opacity hover:opacity-90"
+          className="mt-5 w-full rounded-xl bg-white py-4 text-base font-medium text-black transition-opacity hover:opacity-90"
         >
           Generate demo
         </button>
@@ -599,8 +601,8 @@ function ChevronIcon({ open }: { open: boolean }) {
 
 function BackButton({ onClick }: { onClick: () => void }) {
   return (
-    <button onClick={onClick} className="w-full py-2 text-center text-xs text-zinc-600 transition-colors hover:text-zinc-400">
-      Back
+    <button onClick={onClick} className="w-full rounded-xl border border-zinc-800 py-3.5 text-center text-base text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-300">
+      ← Go back
     </button>
   );
 }

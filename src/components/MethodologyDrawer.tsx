@@ -32,7 +32,7 @@ export function MethodologyDrawer({ onClose }: Props) {
         className="glass w-full max-w-2xl animate-slide-up rounded-t-3xl p-8 md:rounded-3xl"
       >
         <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Methodology</h2>
+          <h2 className="text-xl font-semibold">Methodology</h2>
           <button
             onClick={onClose}
             className="rounded-lg p-2 text-zinc-500 transition-colors hover:bg-surface-2 hover:text-zinc-300"
@@ -44,7 +44,7 @@ export function MethodologyDrawer({ onClose }: Props) {
           </button>
         </div>
 
-        <p className="mb-6 text-sm text-zinc-500">
+        <p className="mb-6 text-base text-zinc-400">
           All environmental impact figures are estimates based on published research.
           Actual values depend on data center location, hardware, model architecture,
           and cooling infrastructure. We show these numbers to build awareness, not to
@@ -76,8 +76,8 @@ export function MethodologyDrawer({ onClose }: Props) {
         </div>
 
         <div className="mt-8 rounded-xl border border-zinc-800/50 p-4">
-          <h3 className="mb-2 text-xs font-medium uppercase tracking-wider text-zinc-500">Verification levels</h3>
-          <div className="space-y-2 text-sm">
+          <h3 className="mb-2 text-sm font-medium uppercase tracking-wider text-zinc-400">Verification levels</h3>
+          <div className="space-y-2 text-base">
             <div className="flex items-start gap-2">
               <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-eco-400" />
               <div>
@@ -114,14 +114,14 @@ function MethodologySection({
 }) {
   return (
     <div>
-      <h3 className={`mb-2 text-sm font-medium ${color}`}>{title}</h3>
+      <h3 className={`mb-2 text-base font-medium ${color}`}>{title}</h3>
       <div className="rounded-lg bg-surface-2/50 p-3">
-        <code className="block text-xs text-zinc-300">{formula}</code>
+        <code className="block text-sm text-zinc-300">{formula}</code>
       </div>
-      <p className="mt-2 text-xs text-zinc-500">
-        <span className="text-zinc-400">Source:</span> {source}
+      <p className="mt-2 text-sm text-zinc-400">
+        <span className="text-zinc-300">Source:</span> {source}
       </p>
-      <p className="mt-1 text-xs text-zinc-600">{note}</p>
+      <p className="mt-1 text-sm text-zinc-500">{note}</p>
     </div>
   );
 }

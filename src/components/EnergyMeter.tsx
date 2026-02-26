@@ -94,13 +94,13 @@ export function EnergyMeter({ kwh, maxKwh = 5 }: Props) {
 
         {/* Center text overlay */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <p className="text-3xl font-light tracking-tight text-yellow-400">{displayValue}</p>
-          <p className="text-xs uppercase tracking-widest text-zinc-500">{unit}</p>
+          <p className="text-4xl font-light tracking-tight text-yellow-400">{displayValue}</p>
+          <p className="text-sm uppercase tracking-widest text-zinc-400">{unit}</p>
         </div>
       </div>
 
       {/* Label */}
-      <p className="mt-2 text-xs uppercase tracking-widest text-zinc-500">Energy used</p>
+      <p className="mt-2 text-sm uppercase tracking-widest text-zinc-400">Energy used</p>
     </div>
   );
 }

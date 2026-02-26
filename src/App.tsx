@@ -25,7 +25,7 @@ export function App() {
       )}
 
       {state.phase === 'login' && (
-        <AirdropLogin onData={setUsageData} />
+        <AirdropLogin onData={setUsageData} onBack={goBack} />
       )}
 
       {state.phase === 'dashboard' && state.metrics && state.usageData && (

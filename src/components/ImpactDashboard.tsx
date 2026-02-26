@@ -38,20 +38,20 @@ export function ImpactDashboard({
         <div className="flex items-center gap-3">
           <button
             onClick={onBack}
-            className="rounded-lg p-2 text-zinc-500 transition-colors hover:bg-surface-2 hover:text-zinc-300"
+            className="rounded-lg p-2.5 text-zinc-400 transition-colors hover:bg-surface-2 hover:text-zinc-200"
             aria-label="Go back"
           >
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <h1 className="text-xl font-semibold tracking-tight">Your AI footprint</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Your AI footprint</h1>
         </div>
         <div className="flex items-center gap-2">
           <VerificationBadge status={verification} />
           <button
             onClick={onReset}
-            className="rounded-lg border border-zinc-800 px-3 py-1.5 text-xs text-zinc-500 transition-colors hover:border-zinc-700 hover:text-zinc-300"
+            className="rounded-lg border border-zinc-800 px-4 py-2 text-sm text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-300"
             aria-label="Reset all data and return to start"
           >
             Reset
@@ -66,8 +66,8 @@ export function ImpactDashboard({
             <WaterVisual liters={metrics.waterLiters} />
           </div>
           <div className="mt-4 rounded-xl bg-blue-500/5 px-4 py-3 text-center">
-            <p className="text-sm font-medium text-blue-400">{waterComp.text}</p>
-            <p className="mt-0.5 text-xs text-zinc-500">{waterComp.detail}</p>
+            <p className="text-base font-medium text-blue-400">{waterComp.text}</p>
+            <p className="mt-1 text-sm text-zinc-400">{waterComp.detail}</p>
           </div>
         </div>
         <div className="glass rounded-3xl p-8">
@@ -75,8 +75,8 @@ export function ImpactDashboard({
             <EnergyMeter kwh={metrics.energyKwh} />
           </div>
           <div className="mt-4 rounded-xl bg-yellow-500/5 px-4 py-3 text-center">
-            <p className="text-sm font-medium text-yellow-400">{energyComp.text}</p>
-            <p className="mt-0.5 text-xs text-zinc-500">{energyComp.detail}</p>
+            <p className="text-base font-medium text-yellow-400">{energyComp.text}</p>
+            <p className="mt-1 text-sm text-zinc-400">{energyComp.detail}</p>
           </div>
         </div>
       </div>
@@ -85,12 +85,12 @@ export function ImpactDashboard({
       <div className="mb-6 glass-light rounded-2xl px-6 py-5">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs uppercase tracking-wider text-zinc-500">CO₂ equivalent</p>
-            <p className="mt-1 text-2xl font-light tracking-tight text-eco-400">{metrics.co2Grams.toFixed(0)}g</p>
+            <p className="text-sm uppercase tracking-wider text-zinc-400">CO₂ equivalent</p>
+            <p className="mt-1 text-3xl font-light tracking-tight text-eco-400">{metrics.co2Grams.toFixed(0)}g</p>
           </div>
           <div className="text-right">
-            <p className="text-sm font-medium text-eco-400">{co2Comp.text}</p>
-            <p className="mt-0.5 text-xs text-zinc-500">{co2Comp.detail}</p>
+            <p className="text-base font-medium text-eco-400">{co2Comp.text}</p>
+            <p className="mt-1 text-sm text-zinc-400">{co2Comp.detail}</p>
           </div>
         </div>
       </div>
@@ -108,10 +108,10 @@ export function ImpactDashboard({
       {/* Estimates toggle */}
       <div className="mb-6 flex items-center justify-between rounded-2xl border border-zinc-800/50 px-5 py-3">
         <div className="flex items-center gap-2">
-          <span className="text-sm text-zinc-400">Show breakdowns</span>
+          <span className="text-base text-zinc-400">Show breakdowns</span>
           <button
             onClick={() => setShowMethodology(true)}
-            className="text-xs text-eco-500 underline-offset-2 hover:underline"
+            className="text-sm text-eco-500 underline-offset-2 hover:underline"
           >
             Methodology
           </button>
@@ -143,7 +143,7 @@ export function ImpactDashboard({
                 role="tab"
                 aria-selected={activeTab === tab}
                 onClick={() => setActiveTab(tab)}
-                className={`flex-1 rounded-lg py-2 text-xs font-medium capitalize transition-colors ${
+                className={`flex-1 rounded-lg py-2.5 text-sm font-medium capitalize transition-colors ${
                   activeTab === tab
                     ? 'bg-surface-2 text-white'
                     : 'text-zinc-500 hover:text-zinc-300'
@@ -164,13 +164,13 @@ export function ImpactDashboard({
       <div className="flex gap-3">
         <button
           onClick={() => setShowShare(true)}
-          className="flex-1 rounded-xl bg-white py-3 text-sm font-medium text-black transition-opacity hover:opacity-90"
+          className="flex-1 rounded-xl bg-white py-4 text-base font-medium text-black transition-opacity hover:opacity-90"
         >
           Share
         </button>
         <button
           onClick={() => setShowMethodology(true)}
-          className="flex-1 rounded-xl border border-zinc-800 py-3 text-sm font-medium text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-300"
+          className="flex-1 rounded-xl border border-zinc-800 py-4 text-base font-medium text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-300"
         >
           Methodology
         </button>
@@ -216,8 +216,8 @@ function PlainSummary({
 
   return (
     <div className="mb-6 rounded-2xl border border-zinc-800/30 bg-surface-1/50 p-5">
-      <h3 className="mb-3 text-xs font-medium uppercase tracking-wider text-zinc-500">In plain terms</h3>
-      <p className="text-sm leading-relaxed text-zinc-300">
+      <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-zinc-400">In plain terms</h3>
+      <p className="text-base leading-relaxed text-zinc-300">
         Over this period, your AI usage consumed roughly the equivalent of{' '}
         <span className="text-blue-400">{waterComp.text.toLowerCase()}</span> in data center cooling water,{' '}
         <span className="text-yellow-400">{energyComp.text.toLowerCase()}</span> of electricity, and produced about as much CO₂ as{' '}
@@ -254,9 +254,9 @@ function VerificationBadge({ status }: { status: VerificationStatus }) {
 
 function MetricCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="glass-light rounded-2xl px-5 py-4">
-      <p className="text-xl font-light tracking-tight text-white">{value}</p>
-      <p className="mt-0.5 text-xs text-zinc-500">{label}</p>
+    <div className="glass-light rounded-2xl px-5 py-5">
+      <p className="text-2xl font-light tracking-tight text-white">{value}</p>
+      <p className="mt-1 text-sm text-zinc-400">{label}</p>
     </div>
   );
 }

@@ -62,7 +62,7 @@ export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
     >
       <div className="glass w-full max-w-lg animate-slide-up rounded-t-3xl p-8 md:rounded-3xl">
         <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Share</h2>
+          <h2 className="text-xl font-semibold">Share</h2>
           <button
             onClick={onClose}
             className="rounded-lg p-2 text-zinc-500 transition-colors hover:bg-surface-2 hover:text-zinc-300"
@@ -74,13 +74,13 @@ export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
           </button>
         </div>
 
-        <p className="mb-4 text-xs text-zinc-500">
+        <p className="mb-4 text-sm text-zinc-400">
           All sharing is initiated by you. No data is sent automatically. Share links point to the public app — not to your personal data, because none exists.
         </p>
 
         {/* Editable share text */}
         <div className="mb-4">
-          <label className="mb-1 block text-xs text-zinc-500" htmlFor="share-text">
+          <label className="mb-2 block text-sm text-zinc-400" htmlFor="share-text">
             Share text (editable)
           </label>
           <textarea
@@ -88,7 +88,7 @@ export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
             value={shareText}
             onChange={(e) => setShareText(e.target.value)}
             rows={5}
-            className="w-full rounded-xl border border-zinc-800 bg-surface-2 px-4 py-3 font-mono text-xs text-zinc-300 focus:border-eco-500 focus:outline-none"
+            className="w-full rounded-xl border border-zinc-800 bg-surface-2 px-4 py-3 font-mono text-sm text-zinc-300 focus:border-eco-500 focus:outline-none"
             spellCheck={false}
           />
         </div>
@@ -113,7 +113,7 @@ export function ShareCardBuilder({ metrics, verification, onClose }: Props) {
         <div className="mt-4 border-t border-zinc-800/50 pt-4">
           <button
             onClick={handleDownloadReport}
-            className="w-full rounded-xl border border-zinc-800 py-2.5 text-xs text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-300"
+            className="w-full rounded-xl border border-zinc-800 py-3.5 text-sm text-zinc-300 transition-colors hover:border-zinc-700 hover:text-zinc-200"
           >
             Download full report (JSON)
           </button>
@@ -142,7 +142,7 @@ function ShareButton({
       onClick={onClick}
       disabled={disabled}
       aria-label={label}
-      className="rounded-xl border border-zinc-800 py-2.5 text-xs text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-300 disabled:opacity-40"
+      className="rounded-xl border border-zinc-800 py-3.5 text-sm text-zinc-300 transition-colors hover:border-zinc-700 hover:text-zinc-200 disabled:opacity-40"
     >
       {children}
     </button>

@@ -109,8 +109,8 @@ export function WaterVisual({ liters, maxLiters = 10 }: Props) {
 
       {/* Value display */}
       <div className="mt-4 text-center">
-        <p className="text-3xl font-light tracking-tight text-blue-400">{displayValue}</p>
-        <p className="mt-1 text-xs uppercase tracking-widest text-zinc-500">Water used</p>
+        <p className="text-4xl font-light tracking-tight text-blue-400">{displayValue}</p>
+        <p className="mt-1 text-sm uppercase tracking-widest text-zinc-400">Water used</p>
       </div>
     </div>
   );
