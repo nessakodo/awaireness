@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import type { UsageData, DemoConfig } from '@/types';
 import { generateDemoData, DEFAULT_DEMO_CONFIG, USAGE_PRESETS, TOKEN_EXPLAINER } from '@/lib/demo-data';
 import { PROVIDERS, fetchUsageViaProxy } from '@/lib/providers';
@@ -15,9 +15,16 @@ interface Props {
 export function AirdropLogin({ onData, onBack }: Props) {
   const [mode, setMode] = useState<Mode>('select');
 
+  // Scroll to top on every mode change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [mode]);
+
+  const isSelect = mode === 'select';
+
   return (
-    <div className="fixed inset-0 flex items-center justify-center overflow-y-auto p-4">
-      <div className="w-full max-w-md animate-fade-in">
+    <div className={`min-h-screen px-4 py-8 ${isSelect ? 'flex items-center justify-center' : ''}`}>
+      <div className="mx-auto w-full max-w-md animate-fade-in">
         <div className="mb-5 text-center">
           <h2 className="text-2xl font-semibold tracking-tight">Your AI footprint</h2>
           <p className="mt-2 text-sm text-zinc-400">Choose how to view your impact</p>
