@@ -76,7 +76,7 @@ export function generateShareCard(
 
     const metricItems = [
       { label: 'Water', value: waterStr, color: '#60a5fa' },
-      { label: 'Energy', value: `${metrics.energyKwh.toFixed(2)} kWh`, color: '#facc15' },
+      { label: 'Energy', value: `${metrics.energyKwh.toFixed(1)} kWh`, color: '#facc15' },
       { label: 'CO₂', value: `${metrics.co2Grams.toFixed(0)}g`, color: '#4ade80' },
     ];
 
